@@ -14,9 +14,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Check if AZURE_CREDENTIALS exists
-        run: echo "Secret is set"
-        if: ${{ secrets.AZURE_CREDENTIALS != '' }}
+      - name: Check if AZURE_CREDENTIALS is available
+        run: |
+          if [ -z "${{ secrets.AZURE_CREDENTIALS }}" ]; then
+            echo "AZURE_CREDENTIALS is NOT set"
+            exit 1
+          else
+            echo "AZURE_CREDENTIALS is set"
+          fi
 
       # Step 2: Log in to Azure
       - name: Log in to Azure
