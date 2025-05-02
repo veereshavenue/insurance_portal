@@ -26,10 +26,10 @@ jobs:
           npm install
           npm run build  # Ensure this generates the `dist` folder
 
-      # Step 4: Deploy the `dist` folder to Azure Web App
+      # Step 4: Deploy the `dist` folder to Azure Web App next test
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: insurancePortal  # Replace with your Azure Web App name
           slot-name: production         # Optional: Specify the deployment slot (default is production)
-          package: ./dist  # Replace with the path to your build output (e.g., ./build or a .zip file)
+          package: ./dist  # Replace with the path to your build output (e.g., ./build or a .zip file)       
