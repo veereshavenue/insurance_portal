@@ -14,33 +14,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Check if AZURE_CREDENTIALS is available
-      - name: Check if AZURE_CREDENTIALS is available
-        run: |
-          if [ -z "${{ secrets.AZURE_CREDENTIALS }}" ]; then
-            echo "AZURE_CREDENTIALS is NOT set"
-            exit 1
-          else
-            echo "AZURE_CREDENTIALS is set"
-          fi
-
-      # Step 3: Log in to Azure
+      # Step 2: Log in to Azure
       - name: Log in to Azure
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # Step 4: Verify Azure CLI login
+      # Step 3: Verify Azure CLI login
       - name: Verify Azure CLI login
         run: az account show
 
-      # Step 5: Install dependencies and build the application
+      # Step 4: Install dependencies and build the application
       - name: Install dependencies and build
         run: |
           npm install
           npm run build  # Ensure this generates the `dist` folder
 
-      # Step 6: Deploy the `dist` folder to Azure Web App
+      # Step 5: Deploy to Azure Web App
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
