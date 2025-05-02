@@ -20,6 +20,9 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      - name: Run Azure CLI command (example)
+        run: az account show
+
       # Step 3: Install dependencies and build the application
       - name: Install dependencies and build
         run: |
